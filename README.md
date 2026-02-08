@@ -44,7 +44,7 @@ Aplicar conceitos de **usabilidade e experiência do usuário**, priorizando cla
 
 ## 🛠️ Tecnologias Utilizadas
 - HTML5  
-- Tailwind CSS (CDN)  
+- Tailwind CSS   
 - CSS  
 - JavaScript  
 - Ícones PNG locais  
