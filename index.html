@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>WelTech | Acesso</title>
+    <style>
+        body {
+            position: relative;
+            min-height: 100vh;
+            background-image: url("Fundo-rede-neural-horizontal.jpg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.40); /* escurece */
+            backdrop-filter: blur(6px);     /* desfoca */
+            -webkit-backdrop-filter: blur(6px);
+            z-index: -1;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.033);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 2px solid rgb(12, 186, 255);
+            box-shadow: 0 8px 50px 0 rgba(12, 186, 255, 0.80);
+        }
+
+        .glass:hover {
+            transform: scale(1.03);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-6 text-slate-100 font-sans">
+
+    <div id="login-card" class="glass w-full max-w-md p-10 rounded-3xl transition-all duration-500">
+        
+        <div class="text-center mb-10">
+            <div class="inline-flex items-center justify-center w-16 h-16 bg-cyan-500/20 rounded-full mb-4 ring-1 ring-cyan-400/50">
+                <span class="text-3xl">💻</span>
+            </div>
+            <h1 class="text-3xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-purple-400">
+                WelTech
+            </h1>
+            <p class="text-white mt-2 text-sm uppercase tracking-widest">Conecte-se ao servidor</p>
+        </div>
+
+        <form id="login-form" class="space-y-5">
+            <div class="relative group">
+                <label class="block text-xs font-semibold text-blue-400 mb-1 ml-1 uppercase">Email</label>
+                <input type="email" id="email" required placeholder="usuario@email.com" 
+                    class="w-full bg-white/5 border border-white/10 text-white p-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/50 transition-all placeholder:text-slate-300">
+            </div>
+
+            <div class="relative group">
+                <label class="block text-xs font-semibold text-blue-400 mb-1 ml-1 uppercase">Senha</label>
+
+                <div class="relative">
+                    <input 
+                        type="password" 
+                        id="password" 
+                        required 
+                        placeholder="••••••••"
+                        class="w-full bg-white/5 border border-white/10 text-white p-4 pr-12 rounded-xl
+                            focus:outline-none focus:ring-2 focus:ring-cyan-500/50 transition-all
+                            placeholder:text-slate-300"
+                    >
+
+                    <button 
+                        type="button"
+                        id="togglePassword"
+                        class="absolute right-4 top-1/2 -translate-y-1/2"
+                        aria-label="Mostrar senha"
+                    >
+                        <img 
+                            id="eyeIcon"
+                            src="hide.png"
+                            alt="Esconder senha"
+                            class="w-5 h-5 opacity-80 hover:opacity-100 transition"
+                        >
+                    </button>
+                </div>
+            </div>
+
+            <button type="submit" 
+                class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold py-4 rounded-xl shadow-lg shadow-cyan-900/20 transform active:scale-[0.98] transition-all">
+                LOGAR
+            </button>
+        </form>
+
+        <div id="feedback" class="mt-8 overflow-hidden transition-all max-h-0">
+            <div id="feedback-content" class="p-4 rounded-xl border flex items-center gap-3 bg-white/5">
+                <span id="feedback-icon" class="text-2xl"></span>
+                <p id="feedback-msg" class="text-sm font-medium"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('login-form');
+        const feedback = document.getElementById('feedback');
+        const feedbackContent = document.getElementById('feedback-content');
+        const feedbackMsg = document.getElementById('feedback-msg');
+        const feedbackIcon = document.getElementById('feedback-icon');
+        const card = document.getElementById('login-card');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Simulação de Validação
+            if (email === "admin@admin.com" && password === "admin") {
+                triggerFeedback("Acesso Autorizado! Bem-vindo à rede.", "success");
+            } else {
+                triggerFeedback("Credenciais Inválidas. Tente novamente.", "error");
+            }
+        });
+
+        function triggerFeedback(msg, type) {
+            feedback.style.maxHeight = "100px";
+            feedbackMsg.innerText = msg;
+            
+            if (type === 'success') {
+                feedbackContent.className = "p-4 rounded-xl border border-emerald-500/50 flex items-center gap-3 bg-emerald-500/10 text-emerald-300";
+                feedbackIcon.innerText = "✓";
+                card.style.borderColor = "rgba(16, 185, 129, 0.5)";
+                card.style.boxShadow = "0 8px 50px rgba(16, 185, 129, 0.8)";
+            } else {
+                feedbackContent.className = "p-4 rounded-xl border border-red-500/50 flex items-center gap-3 bg-red-500/10 text-red-300";
+                feedbackIcon.innerText = "✕";
+                card.style.borderColor = "rgba(239, 68, 68, 0.5)";
+                card.style.boxShadow = "0 8px 50px rgba(239, 68, 68, 0.8)";
+                // Shake effect suave
+                card.animate([
+                    { transform: 'translateX(0px)' },
+                    { transform: 'translateX(-5px)' },
+                    { transform: 'translateX(5px)' },
+                    { transform: 'translateX(0px)' }
+                ], { duration: 300 });
+            }
+        }
+
+        // Olho de ver senha ou ocultar senha
+        const togglePassword = document.getElementById("togglePassword");
+        const passwordInput = document.getElementById("password");
+        const eyeIcon = document.getElementById("eyeIcon");
+
+        togglePassword.addEventListener("click", () => {
+            const isHidden = passwordInput.type === "password";
+
+            passwordInput.type = isHidden ? "text" : "password";
+            eyeIcon.src = isHidden
+                ? "view.png"
+                : "hide.png";
+
+            eyeIcon.alt = isHidden ? "Esconder senha" : "Mostrar senha";
+        });
+    </script>
+</body>
+</html>
