@@ -34,7 +34,7 @@ Aplicar conceitos de **usabilidade e experiência do usuário**, priorizando cla
 
 ## 🎨 Metas de Experiência do Usuário
 
-- **Esteticamente apreciável:** uso de glassmorphism, blur e cores modernas  
+- **Esteticamente apreciável:** Blur e cores modernas  
 - **Agradável:** bordas arredondadas e animações suaves  
 - **Interessante:** microinterações e feedback visual  
 - **Satisfatório:** resposta imediata às ações do usuário  
