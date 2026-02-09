@@ -3,6 +3,10 @@
 🔗 **Acesso ao sistema:**  
 https://weltech.vercel.app
 
+Senha de acesso:
+Email: admin@admin.com
+Senha: admin
+
 ## 📌 Descrição do Projeto
 O **WelTech** é um sistema de login fictício desenvolvido para aplicação dos conceitos de **Interação Humano-Computador (IHC)**.  
 O projeto simula um acesso a um sistema tecnológico, funcionando **totalmente offline**, sem banco de dados ou redirecionamento de páginas.
